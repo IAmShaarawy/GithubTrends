@@ -6,10 +6,17 @@ app-version-code = "1"
 app-version-name = "1.0.0"
 agp = "7.4.1"
 kotlin = "1.8.10"
+
 [libraries]
+androidx-core = { module = "androidx.core:core-ktx", version = "1.9.0" }
+androidx-appCompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
+androidx-test-ext-junit = "androidx.test.ext:junit:1.1.5"
+androidx-test-espresso = "androidx.test.espresso:espresso-core:3.5.1"
+google-android-material = "com.google.android.material:material:1.8.0"
+junit = "junit:junit:4.13.2"
+
 
 [bundles]
-
 
 [plugins]
 android-appication = { id = "com.android.application", version.ref = "agp" }

@@ -1,7 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
 pluginManagement {
-//    includeBuild("versionsCatalog")
     repositories {
         google()
         mavenCentral()
