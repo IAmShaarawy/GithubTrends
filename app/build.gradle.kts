@@ -63,6 +63,25 @@ kapt {
     correctErrorTypes = true
 }
 
+kover{
+    filters {
+        classes {
+            excludes+= listOf(
+                "dagger.hilt.internal.aggregatedroot.codegen.*",
+                "hilt_aggregated_deps.*",
+                "*ComposableSingletons*",
+                "*_HiltModules*",
+                "*Hilt_*",
+                "*BuildConfig",
+                "*_Factory",
+                "dev.shaarawy.githubtrends.app.*",
+                "dev.shaarawy.githubtrends.di.*",
+                "dev.shaarawy.githubtrends.ui.*",
+            )
+        }
+    }
+}
+
 dependencies {
     implementation(libs.kotlix.coroutines)
     implementation(libs.kotlix.coroutines.android)
