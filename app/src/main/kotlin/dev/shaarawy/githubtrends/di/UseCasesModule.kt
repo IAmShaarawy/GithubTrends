@@ -4,6 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.shaarawy.githubtrends.domain.PrettyCountUseCase
+import dev.shaarawy.githubtrends.domain.PrettyCountUseCaseImpl
 import dev.shaarawy.githubtrends.domain.TrendingRepoUseCase
 import dev.shaarawy.githubtrends.domain.TrendingRepoUseCaseImpl
 
@@ -12,4 +14,7 @@ import dev.shaarawy.githubtrends.domain.TrendingRepoUseCaseImpl
 interface UseCasesModule {
     @Binds
     fun provideTrendsRepo(trendingRepoUseCaseImpl: TrendingRepoUseCaseImpl): TrendingRepoUseCase
+
+    @Binds
+    fun providePrettyCount(trendingRepoUseCaseImpl: PrettyCountUseCaseImpl): PrettyCountUseCase
 }
