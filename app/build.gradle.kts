@@ -5,6 +5,7 @@ plugins {
     kotlin("kapt")
     alias(libs.plugins.android.appication)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.hilt)
 }
 
@@ -62,6 +63,9 @@ kapt {
 }
 
 dependencies {
+    implementation(libs.kotlix.coroutines)
+    implementation(libs.kotlix.coroutines.android)
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appCompat)
     implementation(libs.google.android.material)
