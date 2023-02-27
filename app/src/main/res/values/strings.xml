@@ -2,4 +2,7 @@
     <string name="app_name">GithubTrends</string>
     <string name="title_activity_app">AppActivity</string>
     <string name="trending">Trending</string>
+    <string name="retry_title">Something Went Wrong..</string>
+    <string name="retry_desc">An alien is probably blocking your signal.</string>
+    <string name="retry">Retry</string>
 </resources>

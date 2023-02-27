@@ -11,15 +11,21 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
 import dev.shaarawy.githubtrends.R
 import dev.shaarawy.githubtrends.presentation.main.MainAction
 import dev.shaarawy.githubtrends.presentation.main.MainState
@@ -101,24 +107,35 @@ fun Content(items: List<ItemViewModel>) {
 @Preview
 fun Error(onRetry: () -> Unit = {}) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Icon(
-            Icons.Default.Close,
-            contentDescription = "logo",
-            modifier = Modifier.size(128.dp),
-            tint = MaterialTheme.colors.onPrimary
+        val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.retry))
+        LottieAnimation(
+            modifier = Modifier.fillMaxWidth(),
+            composition = composition,
+            iterations = LottieConstants.IterateForever,
         )
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "Something Went Wrong",
-            style = MaterialTheme.typography.h6,
-            color = MaterialTheme.colors.onPrimary,
+            text = stringResource(R.string.retry_title),
+            style = MaterialTheme.typography.h5.copy(fontWeight = FontWeight.Bold),
+            color = MaterialTheme.colors.onSurface,
             textAlign = TextAlign.Center
         )
-        TextButton(onClick = onRetry) {
-            Text(text = "Retry")
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = stringResource(R.string.retry_desc),
+            style = MaterialTheme.typography.caption,
+            color = MaterialTheme.colors.onSurface,
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = Modifier.height(64.dp))
+        OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = onRetry) {
+            Text(text = stringResource(R.string.retry))
         }
     }
 }

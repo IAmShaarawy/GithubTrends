@@ -116,4 +116,5 @@ dependencies {
     androidTestImplementation(libs.cash.turbine)
     androidTestImplementation(libs.androidx.test.ext.junit)
     implementation(libs.io.coil.compose)
+    implementation(libs.lottie.compose)
 }
