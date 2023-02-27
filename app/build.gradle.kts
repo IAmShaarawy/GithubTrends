@@ -100,6 +100,7 @@ dependencies {
     implementation(libs.androidx.lifecycle)
     implementation(libs.bundles.compose)
     implementation(libs.google.dagger.hilt.android)
+    testImplementation(libs.google.dagger.hilt.android.testing)
     androidTestImplementation(libs.google.dagger.hilt.android.testing)
     kapt(libs.google.dagger.hilt.compiler)
     kaptTest(libs.google.dagger.hilt.compiler)
