@@ -85,6 +85,7 @@ dependencies {
     testImplementation(libs.google.truth)
     testImplementation(libs.kotlix.coroutines.test)
     testImplementation(libs.squareup.okhttp3.mockwebserver)
+    testImplementation(libs.cash.turbine)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso)
 }

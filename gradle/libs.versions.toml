@@ -21,6 +21,7 @@ squareup-retrofit = { module = "com.squareup.retrofit2:retrofit", version = "2.9
 squareup-logcat = { module = "com.squareup.logcat:logcat", version = "0.1" }
 squareup-okhttp3-mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "okhttp" }
 squareup-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+cash-turbine = "app.cash.turbine:turbine:0.12.1"
 androidx-core = { module = "androidx.core:core-ktx", version = "1.9.0" }
 androidx-appCompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
 androidx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version = "2.5.1" }
