@@ -1,10 +1,9 @@
-package dev.shaarawy.githubtrends.data.services
+package dev.shaarawy.githubtrends.data.remote.services
 
 import com.google.common.truth.Truth.assertThat
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dev.shaarawy.githubtrends.data.remote.dtos.TrendingReposResponse
-import dev.shaarawy.githubtrends.data.remote.services.SearchService
 import dev.shaarawy.githubtrends.fakeDataPath
 import dev.shaarawy.githubtrends.readJSONFile
 import dev.shaarawy.githubtrends.readTextFile
