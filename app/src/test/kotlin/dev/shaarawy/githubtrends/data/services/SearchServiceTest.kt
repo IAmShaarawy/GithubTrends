@@ -1,17 +1,19 @@
 package dev.shaarawy.githubtrends.data.services
 
+import com.google.common.truth.Truth.assertThat
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dev.shaarawy.githubtrends.data.dtos.TrendingReposResponse
+import dev.shaarawy.githubtrends.fakeDataPath
 import dev.shaarawy.githubtrends.readJSONFile
 import dev.shaarawy.githubtrends.readTextFile
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withContext
+import okhttp3.internal.closeQuietly
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
-import com.google.common.truth.Truth.assertThat
-import dev.shaarawy.githubtrends.fakeDataPath
-import okhttp3.internal.closeQuietly
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -19,6 +21,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import retrofit2.HttpException
+import java.net.URLDecoder
+import java.nio.charset.StandardCharsets
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -52,7 +56,9 @@ class SearchServiceTest {
 
         // when
         subjectUnderTest.getTendingRepos()
-        val actual = server.takeRequest().path
+        val actual = withContext(Dispatchers.IO) {
+            URLDecoder.decode(server.takeRequest().path, StandardCharsets.UTF_8.toString())
+        }
 
         //then
         assertThat(actual).apply {

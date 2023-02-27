@@ -13,7 +13,8 @@ suspend fun readTextFile(fileName: String): String =
 
 suspend inline fun <reified T> readJSONFile(fileName: String): T =
     withContext(Dispatchers.Default) {
-        Json.decodeFromString(readTextFile(fileName))
+        val json = Json { ignoreUnknownKeys = true }
+        json.decodeFromString(readTextFile(fileName))
     }
 
 const val fakeDataPath = "data/response.json"
