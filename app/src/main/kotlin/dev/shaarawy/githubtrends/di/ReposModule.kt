@@ -14,5 +14,5 @@ import dev.shaarawy.githubtrends.data.repos.TrendsRepoImpl
 interface ReposModule {
 
     @Binds
-    fun provideOkHttpClient(trendsRepoImpl: TrendsRepoImpl): TrendsRepo
+    fun provideTrendsRepo(trendsRepoImpl: TrendsRepoImpl): TrendsRepo
 }

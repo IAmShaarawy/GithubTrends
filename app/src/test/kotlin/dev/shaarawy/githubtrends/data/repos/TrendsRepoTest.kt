@@ -72,7 +72,7 @@ class TrendsRepoTest {
     @Test
     fun `ensure trending repos ids`(): Unit = runTest(testDispatcher) {
         // given
-        val expectedIds = readJSONFile<TrendingReposResponse>(fakeDataPath).items!!.map { it.id!! }
+        val expectedIds = readJSONFile<TrendingReposResponse>(fakeDataPath).items!!.map { it.id }
         val response = MockResponse().apply { setBody(readTextFile(fakeDataPath)) }
         server.enqueue(response)
 
@@ -91,7 +91,7 @@ class TrendsRepoTest {
     fun `ensure trending repos owners ids`(): Unit = runTest(testDispatcher) {
         // given
         val expectedIds =
-            readJSONFile<TrendingReposResponse>(fakeDataPath).items!!.map { it.owner!!.id!! }
+            readJSONFile<TrendingReposResponse>(fakeDataPath).items!!.map { it.owner?.id }
         val response = MockResponse().apply { setBody(readTextFile(fakeDataPath)) }
         server.enqueue(response)
 

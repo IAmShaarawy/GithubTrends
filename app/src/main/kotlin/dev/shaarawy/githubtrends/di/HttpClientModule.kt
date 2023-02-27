@@ -6,8 +6,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.shaarawy.githubtrends.foundation.json
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import javax.inject.Singleton
@@ -31,7 +31,6 @@ class HttpClientModule {
     companion object {
         private const val domain = "https://api.github.com/"
         private val jsonMediaType = "application/json".toMediaType()
-        private val json = Json { ignoreUnknownKeys = true }
 
         @OptIn(ExperimentalSerializationApi::class)
         val DefaultJsonConverter = json.asConverterFactory(jsonMediaType)
