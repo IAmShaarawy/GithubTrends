@@ -6,7 +6,7 @@ data class TrendRepoModel(
     val description: String,
     val url: String,
     val language: String,
-    val starsCount: Int,
+    val starsCount: PrettyCount,
     val owner: Owner,
     val colorHex:String
 ) {

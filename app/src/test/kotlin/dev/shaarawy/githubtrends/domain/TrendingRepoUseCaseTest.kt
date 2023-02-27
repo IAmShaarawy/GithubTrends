@@ -5,8 +5,11 @@ import app.cash.turbine.test
 import com.google.common.truth.Truth
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import dev.shaarawy.githubtrends.data.remote.dtos.TrendingReposResponse
 import dev.shaarawy.githubtrends.di.DispatcherProviderModuleMock.*
+import dev.shaarawy.githubtrends.domain.dtos.Multiplier
 import dev.shaarawy.githubtrends.foundation.fakeDataPath
+import dev.shaarawy.githubtrends.foundation.readJSONFile
 import dev.shaarawy.githubtrends.foundation.readTextFile
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestDispatcher
@@ -52,28 +55,51 @@ class TrendingRepoUseCaseTest {
     }
 
     @Test
-    fun `ensure that repos without url or empty will not show up`(): Unit  = runTest(testDispatcher){
-        // given
-        val expectedCount = 3
-        val response = MockResponse().apply { setBody(readTextFile(fakeDataPath)) }
-        server.enqueue(response)
+    fun `ensure that repos without url or empty will not show up`(): Unit =
+        runTest(testDispatcher) {
+            // given
+            val expectedCount = 3
+            val response = MockResponse().apply { setBody(readTextFile(fakeDataPath)) }
+            server.enqueue(response)
 
-        // when
-        val flowSubject = subjectUnderTest.invoke()
-        advanceUntilIdle()
+            // when
+            val flowSubject = subjectUnderTest.invoke()
+            advanceUntilIdle()
 
-        // then
-        flowSubject.test {
-            Truth.assertThat(awaitItem()).hasSize(expectedCount)
-            awaitComplete()
+            // then
+            flowSubject.test {
+                Truth.assertThat(awaitItem()).hasSize(expectedCount)
+                awaitComplete()
+            }
+
         }
 
-    }
+    @Test
+    fun `ensure that repos owners without url or empty will not show up`(): Unit =
+        runTest(testDispatcher) {
+            // given
+            val expectedCount = 3
+            val response = MockResponse().apply { setBody(readTextFile(fakeDataPath)) }
+            server.enqueue(response)
+
+            // when
+            val flowSubject = subjectUnderTest.invoke()
+            advanceUntilIdle()
+
+            // then
+            flowSubject.test {
+                Truth.assertThat(awaitItem()).hasSize(expectedCount)
+                awaitComplete()
+            }
+
+        }
 
     @Test
-    fun `ensure that repos owners without url or empty will not show up`(): Unit  = runTest(testDispatcher){
+    fun `ensure that repos stars count is valid`(): Unit = runTest(testDispatcher) {
         // given
-        val expectedCount = 3
+        val expected = readJSONFile<TrendingReposResponse>(fakeDataPath).items?.first {
+            (it.stargazersCount ?: 0) / 1000 > 1 && it.url!=null && it.owner?.url!=null
+        }
         val response = MockResponse().apply { setBody(readTextFile(fakeDataPath)) }
         server.enqueue(response)
 
@@ -83,7 +109,8 @@ class TrendingRepoUseCaseTest {
 
         // then
         flowSubject.test {
-            Truth.assertThat(awaitItem()).hasSize(expectedCount)
+            Truth.assertThat(awaitItem().firstOrNull { it.starsCount.multiplier == Multiplier.K }?.id)
+                .isEqualTo(expected!!.id)
             awaitComplete()
         }
 

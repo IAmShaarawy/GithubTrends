@@ -2,6 +2,8 @@ package dev.shaarawy.githubtrends.domain
 
 import dev.shaarawy.githubtrends.data.repos.TrendsRepo
 import dev.shaarawy.githubtrends.data.repos.dtos.TrendRepoItem
+import dev.shaarawy.githubtrends.domain.dtos.Multiplier
+import dev.shaarawy.githubtrends.domain.dtos.PrettyCount
 import dev.shaarawy.githubtrends.domain.dtos.TrendRepoModel
 import dev.shaarawy.githubtrends.foundation.DispatchersProvider
 import kotlinx.coroutines.flow.Flow
@@ -34,7 +36,7 @@ class TrendingRepoUseCaseImpl @Inject constructor(
             description = input.description,
             url = input.url,
             language = input.language,
-            starsCount = input.starsCount,
+            starsCount = PrettyCount(input.starsCount.toDouble(),Multiplier.Non),
             colorHex = "null",
             owner = TrendRepoModel.Owner(
                 id = input.owner.id,
