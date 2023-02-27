@@ -67,6 +67,8 @@ dependencies {
     implementation(libs.kotlix.coroutines)
     implementation(libs.kotlix.coroutines.android)
     implementation(libs.kotlinx.serialization.json)
+    testImplementation(libs.squareup.retrofit)
+    testImplementation(libs.squareup.logcat)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appCompat)
     implementation(libs.google.android.material)
@@ -79,6 +81,8 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.robolectric)
     testImplementation(libs.google.truth)
+    testImplementation(libs.kotlix.coroutines.test)
+    testImplementation(libs.squareup.okhttp3.mockwebserver)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso)
 }

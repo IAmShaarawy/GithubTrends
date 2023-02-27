@@ -14,9 +14,11 @@ hilt = "2.44"
 [libraries]
 kotlix-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlix-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlix-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.5.0" }
 squareup-retrofit = { module = "com.squareup.retrofit2:retrofit", version = "2.9.0" }
 squareup-logcat = { module = "com.squareup.logcat:logcat", version = "0.1" }
+squareup-okhttp3-mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version = "4.10.0" }
 androidx-core = { module = "androidx.core:core-ktx", version = "1.9.0" }
 androidx-appCompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
 androidx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version = "2.5.1" }

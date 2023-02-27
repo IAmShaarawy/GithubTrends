@@ -15,3 +15,5 @@ suspend inline fun <reified T> readJSONFile(fileName: String): T =
     withContext(Dispatchers.Default) {
         Json.decodeFromString(readTextFile(fileName))
     }
+
+const val fakeDataPath = "data/response.json"
