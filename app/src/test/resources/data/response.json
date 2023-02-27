@@ -14,7 +14,6 @@
         "node_id": "MDEyOk9yZ2FuaXphdGlvbjIzNTg2OTIy",
         "avatar_url": "https://avatars.githubusercontent.com/u/23586922?v=4",
         "gravatar_id": "",
-        "url": "https://api.github.com/users/neoclide",
         "html_url": "https://github.com/neoclide",
         "followers_url": "https://api.github.com/users/neoclide/followers",
         "following_url": "https://api.github.com/users/neoclide/following{/other_user}",
@@ -260,7 +259,6 @@
       "html_url": "https://github.com/elixir-lang/elixir",
       "description": "Elixir is a dynamic, functional language designed for building scalable and maintainable applications",
       "fork": false,
-      "url": "https://api.github.com/repos/elixir-lang/elixir",
       "forks_url": "https://api.github.com/repos/elixir-lang/elixir/forks",
       "keys_url": "https://api.github.com/repos/elixir-lang/elixir/keys{/key_id}",
       "collaborators_url": "https://api.github.com/repos/elixir-lang/elixir/collaborators{/collaborator}",
@@ -567,6 +565,7 @@
       "watchers": 21077,
       "default_branch": "main",
       "score": 1.0
-    }
+    },
+    {}
   ]
 }
