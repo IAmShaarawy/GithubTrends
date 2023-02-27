@@ -2,8 +2,10 @@
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
+    kotlin("kapt")
     alias(libs.plugins.android.appication)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -48,15 +50,30 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.appCompat)
     implementation(libs.google.android.material)
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+    implementation(libs.androidx.lifecycle)
     implementation(libs.bundles.compose)
+    implementation(libs.google.dagger.hilt.android)
+    testImplementation(libs.google.dagger.hilt.android.testing)
+    kapt(libs.google.dagger.hilt.compiler)
+    kaptTest(libs.google.dagger.hilt.compiler)
     testImplementation(libs.junit)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.google.truth)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso)
 }
