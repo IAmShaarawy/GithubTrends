@@ -69,7 +69,7 @@ class TrendingRepoUseCaseTest {
             // then
             flowSubject.test {
                 Truth.assertThat(awaitItem()).hasSize(expectedCount)
-                awaitComplete()
+                cancelAndConsumeRemainingEvents()
             }
 
         }
@@ -89,7 +89,7 @@ class TrendingRepoUseCaseTest {
             // then
             flowSubject.test {
                 Truth.assertThat(awaitItem()).hasSize(expectedCount)
-                awaitComplete()
+                cancelAndConsumeRemainingEvents()
             }
 
         }
@@ -111,7 +111,7 @@ class TrendingRepoUseCaseTest {
         flowSubject.test {
             Truth.assertThat(awaitItem().firstOrNull { it.starsCount.multiplier == Multiplier.K }?.id)
                 .isEqualTo(expected!!.id)
-            awaitComplete()
+            cancelAndConsumeRemainingEvents()
         }
 
     }

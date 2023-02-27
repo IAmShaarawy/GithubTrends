@@ -65,7 +65,7 @@ class TrendsRepoTest {
         // then
         flowSubject.test {
             assertThat(awaitItem()).hasSize(expectedCount)
-            awaitComplete()
+            cancelAndConsumeRemainingEvents()
         }
     }
 
@@ -83,7 +83,7 @@ class TrendsRepoTest {
         // then
         flowSubject.test {
             assertThat(awaitItem().map { it.id }).containsExactlyElementsIn(expectedIds)
-            awaitComplete()
+            cancelAndConsumeRemainingEvents()
         }
     }
 
@@ -102,7 +102,7 @@ class TrendsRepoTest {
         // then
         flowSubject.test {
             assertThat(awaitItem().map { it.owner.id }).containsExactlyElementsIn(expectedIds)
-            awaitComplete()
+            cancelAndConsumeRemainingEvents()
         }
     }
 }
