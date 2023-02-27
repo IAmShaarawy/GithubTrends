@@ -6,11 +6,13 @@ import dagger.hilt.components.SingletonComponent
 import dagger.hilt.testing.TestInstallIn
 import dev.shaarawy.githubtrends.foundation.DispatchersProvider
 import dev.shaarawy.githubtrends.foundation.DispatchersProviderImpl
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestDispatcher
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @Module
 @TestInstallIn(
     components = [SingletonComponent::class],
