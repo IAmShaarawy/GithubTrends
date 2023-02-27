@@ -35,7 +35,7 @@ class TrendsRepoImpl @Inject constructor(
                 )
             )
         }
-    }.onEmpty {
+    }.onStart {
         fetchAndInsertDataToCache()
     }
 
