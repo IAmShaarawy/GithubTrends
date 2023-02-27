@@ -12,8 +12,8 @@ data class TrendRepoModel(
 ) {
     data class Owner(
         val id: Int,
-        val name: String?,
-        val avatarUrl: String?,
+        val name: String,
+        val avatarUrl: String,
         val url: String
     )
 }
