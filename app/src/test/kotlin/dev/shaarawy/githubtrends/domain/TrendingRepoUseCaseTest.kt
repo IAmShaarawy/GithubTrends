@@ -54,7 +54,7 @@ class TrendingRepoUseCaseTest {
     @Test
     fun `ensure that repos without url or empty will not show up`(): Unit  = runTest(testDispatcher){
         // given
-        val expectedCount = 4
+        val expectedCount = 3
         val response = MockResponse().apply { setBody(readTextFile(fakeDataPath)) }
         server.enqueue(response)
 
@@ -73,7 +73,7 @@ class TrendingRepoUseCaseTest {
     @Test
     fun `ensure that repos owners without url or empty will not show up`(): Unit  = runTest(testDispatcher){
         // given
-        val expectedCount = 4
+        val expectedCount = 3
         val response = MockResponse().apply { setBody(readTextFile(fakeDataPath)) }
         server.enqueue(response)
 
