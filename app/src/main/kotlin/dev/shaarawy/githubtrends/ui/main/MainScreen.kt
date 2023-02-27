@@ -15,10 +15,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.shaarawy.githubtrends.R
 import dev.shaarawy.githubtrends.presentation.main.MainAction
 import dev.shaarawy.githubtrends.presentation.main.MainState
 import dev.shaarawy.githubtrends.presentation.main.MainViewModel
@@ -34,7 +36,16 @@ fun MainScreen(viewModel: MainViewModel = viewModel()) {
     val state = viewModel.mainViewState
         .collectAsState()
         .value
-    Scaffold {
+    Scaffold(topBar = {
+        TopAppBar(backgroundColor = MaterialTheme.colors.background) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(R.string.trending),
+                style = MaterialTheme.typography.h5.copy(color = MaterialTheme.colors.onSurface),
+                textAlign = TextAlign.Center
+            )
+        }
+    }) {
         if (state is MainState.Empty)
             Empty()
         if (state is MainState.Content)
