@@ -45,6 +45,23 @@ class SearchServiceTest {
     }
 
     @Test
+    fun `ensure correctness of request path and query parameter`() = runTest {
+        // given
+        val response = MockResponse().apply { setBody(readTextFile(fakeDataPath)) }
+        server.enqueue(response)
+
+        // when
+        subjectUnderTest.getTendingRepos()
+        val actual = server.takeRequest().path
+
+        //then
+        assertThat(actual).apply {
+            isNotNull()
+            isEqualTo("/search/repositories?q=language=+sort:stars")
+        }
+    }
+
+    @Test
     fun `ensure that the service will return the fake data in resources directory`() = runTest {
         // given
         val response = MockResponse().apply { setBody(readTextFile(fakeDataPath)) }
