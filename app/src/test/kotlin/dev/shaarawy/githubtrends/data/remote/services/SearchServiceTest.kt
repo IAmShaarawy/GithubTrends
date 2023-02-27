@@ -4,9 +4,9 @@ import com.google.common.truth.Truth.assertThat
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dev.shaarawy.githubtrends.data.remote.dtos.TrendingReposResponse
-import dev.shaarawy.githubtrends.fakeDataPath
-import dev.shaarawy.githubtrends.readJSONFile
-import dev.shaarawy.githubtrends.readTextFile
+import dev.shaarawy.githubtrends.foundation.fakeDataPath
+import dev.shaarawy.githubtrends.foundation.readJSONFile
+import dev.shaarawy.githubtrends.foundation.readTextFile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

@@ -1,4 +1,4 @@
-package dev.shaarawy.githubtrends
+package dev.shaarawy.githubtrends.foundation
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
