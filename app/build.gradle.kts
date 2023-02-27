@@ -21,7 +21,7 @@ android {
         versionCode = libs.versions.app.version.code.get().toInt()
         versionName = libs.versions.app.version.name.get()
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "dev.shaarawy.githubtrends.HiltApplicationRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -94,12 +94,13 @@ dependencies {
     implementation(libs.androidx.appCompat)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    androidTestImplementation(libs.androidx.test.runner)
     kapt(libs.androidx.room.compiler)
     implementation(libs.google.android.material)
     implementation(libs.androidx.lifecycle)
     implementation(libs.bundles.compose)
     implementation(libs.google.dagger.hilt.android)
-    testImplementation(libs.google.dagger.hilt.android.testing)
+    androidTestImplementation(libs.google.dagger.hilt.android.testing)
     kapt(libs.google.dagger.hilt.compiler)
     kaptTest(libs.google.dagger.hilt.compiler)
     testImplementation(libs.junit)

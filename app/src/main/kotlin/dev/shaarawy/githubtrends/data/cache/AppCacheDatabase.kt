@@ -7,7 +7,7 @@ import dev.shaarawy.githubtrends.data.cache.entities.TrendRepoEntity
 
 @Database(
     version = 1,
-    exportSchema = true,
+    exportSchema = false,
     entities = [TrendRepoEntity::class]
 )
 abstract class AppCacheDatabase : RoomDatabase() {

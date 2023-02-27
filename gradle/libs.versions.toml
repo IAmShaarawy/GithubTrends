@@ -27,7 +27,7 @@ androidx-core = { module = "androidx.core:core-ktx", version = "1.9.0" }
 androidx-appCompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
 androidx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version = "2.5.1" }
 androidx-test-ext-junit = "androidx.test.ext:junit:1.1.5"
-androidx-test-espresso = "androidx.test.espresso:espresso-core:3.5.1"
+androidx-test-runner = "androidx.test:runner:1.5.2"
 androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 androidx-compose-uiToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 androidx-compose-material = "androidx.compose.material:material:1.4.0-beta02"

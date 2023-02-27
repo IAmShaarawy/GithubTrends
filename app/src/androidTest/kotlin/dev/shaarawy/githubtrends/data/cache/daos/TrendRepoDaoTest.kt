@@ -9,7 +9,6 @@ import com.google.common.truth.Truth.assertThat
 import dev.shaarawy.githubtrends.data.cache.AppCacheDatabase
 import dev.shaarawy.githubtrends.data.cache.entities.TrendRepoEntity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 
@@ -21,9 +20,8 @@ import org.junit.runner.RunWith
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 class TrendRepoDaoTest {
-
-    private lateinit var subjectUnderTest: TrendRepoDao
-    private lateinit var db: AppCacheDatabase
+    lateinit var subjectUnderTest: TrendRepoDao
+    lateinit var db: AppCacheDatabase
 
     @Before
     fun setUp() {
@@ -35,19 +33,21 @@ class TrendRepoDaoTest {
     }
 
     @After
+    @Throws(Exception::class)
     fun tearDown() {
         db.close()
     }
 
     @Test
-    fun validate_insertion_and_delete() = runTest(UnconfinedTestDispatcher()) {
+    @Throws(Exception::class)
+    fun validate_insertion_and_delete() = runTest() {
         //given
         val expected = listOf(fakeTrendsRepo(1), fakeTrendsRepo(2), fakeTrendsRepo(3))
 
         // when
         subjectUnderTest.bulkInsert(expected)
         this.advanceUntilIdle()
-        val turbineReceiver =  subjectUnderTest.getAllRepos().testIn(this)
+        val turbineReceiver = subjectUnderTest.getAllRepos().testIn(this)
 
         // then
         val actual = turbineReceiver.awaitItem()
