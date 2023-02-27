@@ -16,6 +16,7 @@ import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import javax.inject.Inject
@@ -43,6 +44,7 @@ class TrendsRepoTest {
         server.closeQuietly()
     }
 
+    @Test
     fun `ensure trending repos count`(): Unit = runTest {
         // given
         val expectedCount = readJSONFile<TrendingReposResponse>(fakeDataPath).items!!.size
@@ -58,6 +60,7 @@ class TrendsRepoTest {
         }
     }
 
+    @Test
     fun `ensure trending repos ids`(): Unit = runTest {
         // given
         val expectedIds = readJSONFile<TrendingReposResponse>(fakeDataPath).items!!.map { it.id!! }
@@ -73,6 +76,7 @@ class TrendsRepoTest {
         }
     }
 
+    @Test
     fun `ensure trending repos owners ids`(): Unit = runTest {
         // given
         val expectedIds =
@@ -85,7 +89,7 @@ class TrendsRepoTest {
 
         // then
         flowSubject.test {
-            assertThat(awaitItem().map { it.owner!!.id }).containsExactlyElementsIn(expectedIds)
+            assertThat(awaitItem().map { it.owner.id }).containsExactlyElementsIn(expectedIds)
         }
     }
 }
