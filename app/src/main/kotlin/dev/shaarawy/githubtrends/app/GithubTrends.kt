@@ -1,4 +1,4 @@
-package dev.shaarawy.githubtrends
+package dev.shaarawy.githubtrends.app
 
 import android.app.Application
 
