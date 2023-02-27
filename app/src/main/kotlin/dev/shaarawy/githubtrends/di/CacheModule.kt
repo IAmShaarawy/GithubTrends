@@ -21,6 +21,7 @@ class CacheModule {
         Room.databaseBuilder(context, AppCacheDatabase::class.java, "app_cache")
             .fallbackToDestructiveMigration().build()
 
+    @Provides
     fun provideTrendRepoDao(appCacheDatabase: AppCacheDatabase): TrendRepoDao =
         appCacheDatabase.trendReposDao()
 }

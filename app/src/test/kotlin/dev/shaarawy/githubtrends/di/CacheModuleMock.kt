@@ -7,7 +7,7 @@ import dagger.hilt.testing.TestInstallIn
 import dev.shaarawy.githubtrends.data.cache.daos.TrendRepoDao
 import dev.shaarawy.githubtrends.data.cache.entities.TrendRepoEntity
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Module
 @TestInstallIn(
@@ -18,12 +18,11 @@ class CacheModuleMock {
 
     @Provides
     fun provideTrendRepoDao(): TrendRepoDao = object : TrendRepoDao {
-        private val cache: MutableList<TrendRepoEntity> = mutableListOf()
+        private val cache: MutableStateFlow<List<TrendRepoEntity>> = MutableStateFlow(emptyList())
         override suspend fun bulkInsert(repos: List<TrendRepoEntity>) {
-            cache.clear()
-            cache.addAll(repos)
+            cache.emit(repos)
         }
 
-        override fun getAllRepos(): Flow<List<TrendRepoEntity>> = flow { emit(cache) }
+        override fun getAllRepos(): Flow<List<TrendRepoEntity>> = cache
     }
 }
