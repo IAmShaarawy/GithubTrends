@@ -8,7 +8,7 @@ data class TrendRepoModel(
     val language: String,
     val starsCount: PrettyCount,
     val owner: Owner,
-    val colorHex:String
+    val colorHex: String
 ) {
     data class Owner(
         val id: Int,

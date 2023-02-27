@@ -1,5 +1,6 @@
 package dev.shaarawy.githubtrends.domain
 
+import dev.shaarawy.githubtrends.data.repos.HexColorRepo
 import dev.shaarawy.githubtrends.data.repos.TrendsRepo
 import dev.shaarawy.githubtrends.data.repos.dtos.TrendRepoItem
 import dev.shaarawy.githubtrends.domain.dtos.TrendRepoModel
@@ -14,13 +15,14 @@ interface TrendingRepoUseCase : () -> Flow<List<TrendRepoModel>>
 class TrendingRepoUseCaseImpl @Inject constructor(
     private val dispatchersProvider: DispatchersProvider,
     private val prettyCountUseCase: PrettyCountUseCase,
-    private val trendsRepo: TrendsRepo
+    private val trendsRepo: TrendsRepo,
+    private val hexColorRepo: HexColorRepo,
 ) : TrendingRepoUseCase {
     override fun invoke(): Flow<List<TrendRepoModel>> = trendsRepo.trendsRepoItemsFlow()
-        .map { it.mapNotNull(this::validateAndMapRepoItem) }
+        .map { it.mapNotNull { validateAndMapRepoItem(it) } }
         .flowOn(dispatchersProvider.default)
 
-    private fun validateAndMapRepoItem(input: TrendRepoItem): TrendRepoModel? {
+    private suspend fun validateAndMapRepoItem(input: TrendRepoItem): TrendRepoModel? {
 
         if (input.id == null || input.name == null ||
             input.description == null || input.url == null ||
@@ -36,7 +38,7 @@ class TrendingRepoUseCaseImpl @Inject constructor(
             url = input.url,
             language = input.language,
             starsCount = prettyCountUseCase.invoke(input.starsCount),
-            colorHex = "null",
+            colorHex = hexColorRepo.provideForLanguage(input.language) ?: "#fff",
             owner = TrendRepoModel.Owner(
                 id = input.owner.id,
                 name = input.owner.name,
