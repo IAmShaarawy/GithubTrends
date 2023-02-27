@@ -77,6 +77,7 @@ kover{
                 "dev.shaarawy.githubtrends.app.*",
                 "dev.shaarawy.githubtrends.di.*",
                 "dev.shaarawy.githubtrends.ui.*",
+                "dev.shaarawy.githubtrends.data.cache.*",
             )
         }
     }
