@@ -5,10 +5,12 @@ import com.google.common.truth.Truth.assertThat
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dev.shaarawy.githubtrends.data.remote.dtos.TrendingReposResponse
+import dev.shaarawy.githubtrends.foundation.DispatchersProvider
 import dev.shaarawy.githubtrends.foundation.fakeDataPath
 import dev.shaarawy.githubtrends.foundation.readJSONFile
 import dev.shaarawy.githubtrends.foundation.readTextFile
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import okhttp3.internal.closeQuietly
 import okhttp3.mockwebserver.MockResponse
@@ -34,6 +36,9 @@ class TrendsRepoTest {
     @Inject
     lateinit var server: MockWebServer
 
+    @Inject
+    lateinit var dispatchersProvider: DispatchersProvider
+
     @Before
     fun setUp() {
         hiltRule.inject()
@@ -45,7 +50,7 @@ class TrendsRepoTest {
     }
 
     @Test
-    fun `ensure trending repos count`(): Unit = runTest {
+    fun `ensure trending repos count`(): Unit = runTest(dispatchersProvider.io) {
         // given
         val expectedCount = readJSONFile<TrendingReposResponse>(fakeDataPath).items!!.size
         val response = MockResponse().apply { setBody(readTextFile(fakeDataPath)) }
@@ -53,15 +58,17 @@ class TrendsRepoTest {
 
         // when
         val flowSubject = subjectUnderTest.trendsRepoItemsFlow()
+        advanceUntilIdle()
 
         // then
         flowSubject.test {
             assertThat(awaitItem()).hasSize(expectedCount)
+            awaitComplete()
         }
     }
 
     @Test
-    fun `ensure trending repos ids`(): Unit = runTest {
+    fun `ensure trending repos ids`(): Unit = runTest(dispatchersProvider.io) {
         // given
         val expectedIds = readJSONFile<TrendingReposResponse>(fakeDataPath).items!!.map { it.id!! }
         val response = MockResponse().apply { setBody(readTextFile(fakeDataPath)) }
@@ -69,6 +76,7 @@ class TrendsRepoTest {
 
         // when
         val flowSubject = subjectUnderTest.trendsRepoItemsFlow()
+        advanceUntilIdle()
 
         // then
         flowSubject.test {
@@ -77,7 +85,7 @@ class TrendsRepoTest {
     }
 
     @Test
-    fun `ensure trending repos owners ids`(): Unit = runTest {
+    fun `ensure trending repos owners ids`(): Unit = runTest(dispatchersProvider.io) {
         // given
         val expectedIds =
             readJSONFile<TrendingReposResponse>(fakeDataPath).items!!.map { it.owner!!.id!! }
@@ -86,6 +94,7 @@ class TrendsRepoTest {
 
         // when
         val flowSubject = subjectUnderTest.trendsRepoItemsFlow()
+        advanceUntilIdle()
 
         // then
         flowSubject.test {
