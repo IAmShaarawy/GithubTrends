@@ -1,4 +1,4 @@
-package dev.shaarawy.githubtrends.data.dtos
+package dev.shaarawy.githubtrends.data.remote.dtos
 
 
 import kotlinx.serialization.SerialName

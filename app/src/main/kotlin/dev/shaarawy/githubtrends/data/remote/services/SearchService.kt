@@ -1,6 +1,6 @@
-package dev.shaarawy.githubtrends.data.services
+package dev.shaarawy.githubtrends.data.remote.services
 
-import dev.shaarawy.githubtrends.data.dtos.TrendingReposResponse
+import dev.shaarawy.githubtrends.data.remote.dtos.TrendingReposResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

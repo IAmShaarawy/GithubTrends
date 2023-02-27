@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dev.shaarawy.githubtrends.data.services.SearchService
+import dev.shaarawy.githubtrends.data.remote.services.SearchService
 import retrofit2.Retrofit
 
 @Module
